@@ -15,7 +15,6 @@ function App() {
   const [user, setUser] = useState(userController.state.user);  
 
   useEffect(() => {
-    try {
       if (user.loggedIn === null) {
         userController.checkAuth().then(res => {
           if (res.data.status === 'success') {
@@ -34,9 +33,7 @@ function App() {
         }
         setUser(user)}
       );
-      }} catch {
-        
-      }
+    }
   }, []);
   return (
     <BrowserRouter>

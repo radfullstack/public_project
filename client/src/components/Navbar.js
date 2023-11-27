@@ -9,15 +9,15 @@ function Navbar({ user, setUser }) {
     const { state } = useLocation();
     const handleLogout = async (event) => {
         event.preventDefault();
-        try {} catch {
-            
-        }
+        
         userController.logout().then(res => {
             if (res.data.status === 'success') {
-                setUser(userController.state.user)
+                setUser({
+                    ...userController.state.user, 
+                    loggedIn: false,
+                })
             }
-        }).catch(err=>{ //console.log(err)
-        });
+        }).catch(err=>{});
 ;
         navigate("/")
     }

@@ -13,16 +13,8 @@ export default function RequireAuth(props) {
                 loggedIn: true,
               }
               props.setUser(res.data.user)
-            } else {
-            }
-            console.log(props.user)
-        }).catch(err=>{
-            var test = {
-              ...props.user,
-              loggedIn: false,
-            }
-          props.setUser(test)});//console.log(err)
-        
+            } 
+        }).catch(err=>{});
         }
     }, []);
 

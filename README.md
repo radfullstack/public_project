@@ -21,11 +21,14 @@ This starts as a skeleton for something good, Open Source and something you shou
 
 ## Changelog
 
+### v. 0.2 - Intial commit
++ State, basic auth, protected routes
+
 ### v. 0.1 - Intial commit
 + Structure
 
 ### To do:
-+ Auth pages + form components (register, login, account)
-+ Auth client controller functions (register, login, update account)
-+ Create layout components (header, footer)
++ Account page and update function
++ Fix 401 in console so it doesn't show
++ workout so that user is always in props, without having to pass it into components from App
 + Calendar? To do? Knowledgebase? Notes? Sky is the limit
