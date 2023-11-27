@@ -1,26 +1,44 @@
-const userController = () => {
-    var user = {
-        loggedIn: null,
-        firstName: "",
-        lastName: "",
-        email: "",
-    }
+import axios from 'axios';
 
-    var userRegForm = {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password:""
-    }
+const userController = {
+    state: {
+        user: {
+            loggedIn: null,
+            firstName: "our guest!",
+            lastName: "",
+            email: "",
+        }
+    },
 
-    function checkAuth() {
-        console.log('Query server api')
-    }
-    
-    return {
-        user,
-        userRegForm,
-        checkAuth
+    register: async (event) => {
+
+        const formData  = event;
+
+        const res = await axios.post("/api/auth/register", formData) 
+
+        return res;
+    },
+
+    login: async (event) => {
+
+        const formData  = event;
+
+        const res = await axios.post("/api/auth/login", formData)
+        
+        return res;
+    },
+
+    logout: async () => {
+        const res = await axios.get("/api/auth/logout");
+
+        return res;
+    },
+
+    checkAuth: async () => {
+
+        const res = await axios.get("/api/auth/check-auth")
+
+        return res;
     }
 }
 

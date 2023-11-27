@@ -4,17 +4,32 @@ import { Navigate } from "react-router-dom";
 
 export default function RequireAuth(props) {
 
-    const usercontroller = userController();
-
     useEffect(() => {
-        if (usercontroller.user.loggedIn === null) {
-            usercontroller.checkAuth();
+        if (props.user.loggedIn === null) {
+          userController.checkAuth().then(res => {
+            if (res.data.status === 'success') {
+              res.data.user = {
+                ...res.data.user,
+                loggedIn: true,
+              }
+              props.setUser(res.data.user)
+            } else {
+            }
+            console.log(props.user)
+        }).catch(err=>{
+            var test = {
+              ...props.user,
+              loggedIn: false,
+            }
+          props.setUser(test)});//console.log(err)
+        
         }
     }, []);
 
-    if (usercontroller.user.loggedIn === null || usercontroller.user.loggedIn === false) {
-        console.log("You shouldn't be here!");
-
+    if (props.user.loggedIn === null) {
+        return  <div>Please login</div>;
+    }
+    if (props.user.loggedIn === false) {
         return <Navigate to="/"></Navigate>;
     }
 

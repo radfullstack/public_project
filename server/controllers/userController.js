@@ -39,9 +39,9 @@ async function login(req, res) {
         // Cut with 401
         if (!passwordMatch) return res.status(401).send({ error: 'Incorrect password!' });
 
-        // Create jwt token (30 days)
+        // Create jwt token (30 days)m 
         const exp = Date.now() + 1000 * 60 * 60 * 24 * 30;
-        const token = jwt.sign({ sub: user._id, exp }, process.env.SECRET);
+        const token = jwt.sign({ user_id: user._id, exp }, process.env.SECRET);
 
         // Set cookie, include token
         res.cookie("Authorization", token, {
@@ -50,9 +50,15 @@ async function login(req, res) {
             sameSite: "lax",
             secure: process.env.NODE_ENV === "production",
         });
+        
+        userData = {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+        };
 
         // Respond
-        res.status(200).send({ status: "success", message: "Successfully logged in"});
+        res.status(200).send({ status: "success", message: "Successfully logged in", user: userData});
     } catch (err) {
         // Respond with error
         res.status(400).send({ status: "error", message: "Couldn't login", error: err });
@@ -65,7 +71,7 @@ function logout(req, res) {
         res.cookie("Authorization", "", { expires: new Date() });
 
         // Respond
-        res.status(200).send({ message: 'Logout successful' });
+        res.status(200).send({ status: "success", message: 'Logout successful' });
     } catch (err) {
         // Respond with error
         res.status(400).send({ status: "error", message: "Couldn't logout", error: err });
@@ -75,10 +81,10 @@ function logout(req, res) {
 function checkAuth(req, res) {
     try {
         // Respond
-        res.status(200).send({ status: "success", message: "Logged in"});
+        res.status(200).send({ status: "success", message: "Logged in", user: req.user});
     } catch (err) {
         // Respond with error
-        res.status(400).send({ status: "error", message: "Not logged in", error: err });
+        res.status(401).send({ status: "error", message: "Not logged in", error: err });
     }
 }
 
