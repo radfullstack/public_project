@@ -40,13 +40,19 @@ Embracing the ethos of open source, the project envisions a communal space for u
 
 ### To do:
 + Account page
-    + 401 on check auth before user logs in, can we avoid console throwing it?
     + User strike system - engagement (days in row, points, activity, bonuses, statistics)
     + Update info functionality
     + Ensure customization
         + Visually appealing and unique profile fosters a sense of ownership and identity
     + GDPR Section
         + Data export possibility (all not only user input, but also our output, what we generated based on that data)
++ News
+    + Parse RSS from common channels
+        + Implement per user source selection
+        + Implement new source requests(auto add form with validation?)
+    + Further might be devided into Commercial / Social news
+        + Commercial would be RSS or furher expanded news functionality
+        + Social would be most active users public posts with hype
 + Feedback hub
     + Central space to collaborate with others and build ideas
     + Small components that can be embeded and have a good way of triggering
@@ -84,7 +90,13 @@ Embracing the ethos of open source, the project envisions a communal space for u
 
 ## Changelog
 
-+ #### v. 0.2 - Building structure cd
++ #### v. 0.3 - News, Profile
+    + Created newsController
+    + Created UserProfile and Account Page
+    + Added profile, account update and news routes
+    + Added NewsList and NewsItem components
+    + Added user prefs object to user model
++ #### v. 0.2 - Thoughts and base
     + State, basic auth, protected routes
     + Readme.md
 + #### v. 0.1 - Intial commit

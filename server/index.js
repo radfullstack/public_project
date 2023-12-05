@@ -7,6 +7,7 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const connectDB = require("./config/connectDB");
 const userController = require("./controllers/userController");
+const newsController = require("./controllers/newsController");
 const requireAuth = require("./middleware/requireAuth");
 
 const app = express();
@@ -28,8 +29,11 @@ connectDB();
 // Routing
 app.post("/api/auth/register", userController.register);
 app.post("/api/auth/login", userController.login);
-app.get("/api/auth/logout", userController.logout);
+app.post("/api/auth/update", requireAuth, userController.update);
+app.get("/api/auth/logout", requireAuth, userController.logout);
 app.get("/api/auth/check-auth", requireAuth, userController.checkAuth);
+app.get("/api/news/fetch", requireAuth, newsController.fetchNews);
+app.get("/api/user/:userId", requireAuth, userController.fetchUser);
 app.get("/api/auth/check-admin", userController.checkAdmin);
 
 // Run server

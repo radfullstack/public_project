@@ -7,6 +7,12 @@ const userController = {
             firstName: "our guest!",
             lastName: "",
             email: "",
+            userPrefs: {}
+        },
+        userProfile: {
+            firstName: "",
+            lastName: "",
+            email: "",
         }
     },
 
@@ -15,6 +21,15 @@ const userController = {
         const formData  = event;
 
         const res = await axios.post("/api/auth/register", formData) 
+
+        return res;
+    },
+
+    update: async (event) => {
+
+        const formData  = event;
+
+        const res = await axios.post("/api/auth/update", formData) 
 
         return res;
     },
@@ -37,6 +52,13 @@ const userController = {
     checkAuth: async () => {
 
         const res = await axios.get("/api/auth/check-auth")
+
+        return res;
+    },
+
+    fetchUser: async (userId) => {
+
+        const res = await axios.get("/api/user/" + userId)
 
         return res;
     }

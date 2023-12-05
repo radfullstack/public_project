@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import userController from "../controllers/userController";
 import { Navigate } from "react-router-dom";
 
@@ -14,7 +14,8 @@ export default function RequireAuth(props) {
               }
               props.setUser(res.data.user)
             } 
-        }).catch(err=>{});
+        }).catch(err=>{
+        });
         }
     }, []);
 

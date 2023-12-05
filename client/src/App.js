@@ -9,6 +9,8 @@ import RequireAuth from './middleware/RequireAuth';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Navbar from './components/Navbar';
+import UserProfile from './pages/UserProfile';
+import Account from './pages/Account';
 
 function App() {
   
@@ -18,20 +20,18 @@ function App() {
       if (user.loggedIn === null) {
         userController.checkAuth().then(res => {
           if (res.data.status === 'success') {
-            res.data.user = {
-              ...res.data.user,
-              loggedIn: true,
-            }
+            res.data.user.loggedIn = true;
             setUser(res.data.user)
           } else {
             setUser(userController.state.user)
           }
-      }).catch(err=>{
-        var user = {
-          ...userController.state.user,
-          loggedIn: false,
+        }).catch(err=>{
+          var user = {
+            ...userController.state.user,
+            loggedIn: false,
+          }
+          setUser(user)
         }
-        setUser(user)}
       );
     }
   }, []);
@@ -43,7 +43,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/login' element={<Login setUser={setUser} />} />
           <Route path='/register' element={<Register />} />
-          <Route path='/dashboard' element={<RequireAuth user={user} setUser={setUser}><Dashboard /></RequireAuth>} />
+          <Route path='/dashboard' element={<RequireAuth user={user} setUser={setUser}><Dashboard user={user} setUser={setUser} /></RequireAuth>} />
+          <Route path='/account' element={<RequireAuth user={user} setUser={setUser}><Account user={user} setUser={setUser}/></RequireAuth>} />
+          <Route path='/profile/:userId' element={<RequireAuth user={user} setUser={setUser}><UserProfile /></RequireAuth>} />
         </Routes>
       </div>
 

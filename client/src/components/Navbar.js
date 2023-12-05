@@ -48,6 +48,9 @@ function Navbar({ user, setUser }) {
                     </li>
                 </>) : (<>
                     <li className="nav-item">
+                      <Link to="/account" className="nav-link">Account</Link>
+                    </li>
+                    <li className="nav-item">
                     <button className="btn btn-secondary ms-2"onClick={handleLogout}>Logout</button>
                     </li>
                 </>)}
@@ -57,8 +60,9 @@ function Navbar({ user, setUser }) {
         </nav>
         {state?.data ? (<>
             <div className="container my-3">
-                <div className={'alert alert-' + (state.data.status) + " alert-dismissible fade show mb-3"} role="alert">
-                    <strong>Holy guacamole!</strong> You did it.<br />{state.data.message}
+                <div className={'alert alert-' + (state.data.status === 'error' ? 'danger' : state.data.status) + " alert-dismissible fade show mb-3"} role="alert">
+                    <strong className="text-uppercase">{state.data.status}</strong><br />
+                    {state.data.message}
                     <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>

@@ -98,10 +98,77 @@ function checkAdmin(req, res) {
     }
 }
 
+
+async function fetchUser(req, res) {
+    try {
+        // Get reqest data
+        const userId  = req.params.userId;
+
+        // Query user
+        const user = await User.findOne({_id: userId});
+
+        const strippedUser = {
+            _id: user._id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            createdAt: new Date(user.createdAt).toDateString()
+        };
+
+        //console.log(user)
+        res.status(200).send({ status: "success", message: "Logged in", user: strippedUser});
+    } catch (err) {
+        // Respond with error
+        res.status(404).send({ status: "error", message: "No user found!", error: err });
+    }
+}
+
+
+async function update(req, res) {
+    try {
+        // Get the email and password off req body
+        const { firstName, lastName, email, password, newsSources  } = req.body;
+        const user = await User.findOne({_id: req.user._id});
+
+        // Update user with the data
+        const updatedUser = await User.findByIdAndUpdate(req.user._id, {
+            firstName: firstName === "" || firstName === undefined ? user.firstName : firstName,
+            lastName: lastName === "" || lastName === undefined ? user.lastName : lastName,
+            email: email === "" || email === undefined ? user.email : email,
+            userPrefs: newsSources === "" || newsSources === undefined ? user.userPrefs : {
+                ...user.userPrefs,
+                newsSources: {
+                    ...user.userPrefs === undefined ? '' : {...user.userPrefs.newsSources},
+                    [Object.keys(newsSources)[0]]:Object.values(newsSources)[0]
+                }
+            },
+            password: password === "" || password ===  undefined ? user.password : bcrypt.hashSync(password, 8)
+        }, {new: true});        
+        
+
+
+        const strippedUser = {
+            _id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            email: updatedUser.email,
+            userPrefs: updatedUser.userPrefs
+        };
+
+    // respond
+        res.status(200).send({ status: "success", message: "Your account has been updated", user: strippedUser});
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
+}
+
 module.exports = {
     register,
     login,
     logout,
     checkAuth,
     checkAdmin,
+    fetchUser,
+    update
 };

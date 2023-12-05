@@ -22,6 +22,8 @@ async function requireAuth(req, res, next) {
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            email: user.email,
+            userPrefs: user.userPrefs
         };
 
         // continue on
