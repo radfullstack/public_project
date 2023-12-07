@@ -29,7 +29,6 @@ async function requireAuth(req, res, next) {
         // continue on
         next();
     } catch (err) {
-        console.log(err)
         return res.status(401).send({ status: "error", message: 'Unauthorised' });
     }
 }

@@ -90,6 +90,15 @@ Embracing the ethos of open source, the project envisions a communal space for u
 
 ## Changelog
 
++ #### v. 0.5 - upcoming release
+    + Create 'update & delete' journal post functionality
+    + Create public journal posts page
+    + Create pagination for private and public journal pages (infinite scroll?)
+    + Cahnge fetching news to client based from provided sources (to optimize performance)
++ #### v. 0.4 - Add Journal functionality and some style
+    + Styling to home
+    + Corrected bbc source link
+    + Created journalController, Journal Page, journalPost model
 + #### v. 0.3 - News, Profile
     + Created newsController
     + Created UserProfile and Account Page

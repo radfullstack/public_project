@@ -3,7 +3,7 @@ import NewsList from "../components/news/NewsList";
 function Dashboard({ user, setUser }) {
 
     return (
-        <div className="App">
+        <div className="container my-5 pt-5">
         Dashboard
             <div className="row">
                 <div className="col-12 col-md-6">

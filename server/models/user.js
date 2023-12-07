@@ -6,6 +6,10 @@ const userSchema = new mongoose.Schema({
     email: {type: String},
     password: {type: String},
     userPrefs: {type: Object},
+    journalPosts: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "JournalPost"
+    }],
 }, 
 { timestamps: true });
 

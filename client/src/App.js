@@ -11,6 +11,7 @@ import Login from './pages/Login';
 import Navbar from './components/Navbar';
 import UserProfile from './pages/UserProfile';
 import Account from './pages/Account';
+import Journal from './pages/Journal';
 
 function App() {
   
@@ -38,19 +39,20 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar user={user} setUser={setUser} />
-      <div className="container py-4">
+      <div className="container-fluid p-0 m-0">
         <Routes>
           <Route index element={<Home />} />
           <Route path='/login' element={<Login setUser={setUser} />} />
           <Route path='/register' element={<Register />} />
           <Route path='/dashboard' element={<RequireAuth user={user} setUser={setUser}><Dashboard user={user} setUser={setUser} /></RequireAuth>} />
+          <Route path='/journal' element={<RequireAuth user={user} setUser={setUser}><Journal user={user} setUser={setUser} /></RequireAuth>} />
           <Route path='/account' element={<RequireAuth user={user} setUser={setUser}><Account user={user} setUser={setUser}/></RequireAuth>} />
           <Route path='/profile/:userId' element={<RequireAuth user={user} setUser={setUser}><UserProfile /></RequireAuth>} />
         </Routes>
       </div>
 
       
-      <nav className="navbar sticky-bottom bg-dark" data-bs-theme="dark">
+      <div className="bg-black" data-bs-theme="dark">
         <div className="container">
           <div className="navbar" id="navbar_bottom">
             <ul className="navbar-nav me-auto my-2 my-lg-0 ">
@@ -63,7 +65,7 @@ function App() {
             </ul>
           </div>
         </div>
-      </nav>
+      </div>
       
     </BrowserRouter>
   );

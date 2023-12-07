@@ -6,12 +6,11 @@ async function fetchNews(req, res) {
         // Get reqest data
         // const { newsSources, newsCategories, pagination } = req.body;
         const userSources = req.user.userPrefs === undefined ? [] : req.user.userPrefs.newsSources
-
         const newsSources = {
             bbc_world: {
                 name: 'BBC News',
                 country: 'World',
-                url: 'https://feeds.bbci.co.uk/news/video_and_audio/world/rss.xml'
+                url: 'https://feeds.bbci.co.uk/news/world/rss.xml'
             },
             bbc_uk: {
                 name: 'BBC News',

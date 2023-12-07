@@ -37,23 +37,34 @@ function Login({ setUser }) {
         
         navigate("/dashboard")
     }
+    
+    const handleRegisterRedirect = async (event, history) => {
+        event.preventDefault();
+        
+        navigate('/register');
+    }
 
     return (
-        <form onSubmit={handleLogin}>
-            <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="email" value={formData.email} onChange={handleChange} autoComplete="email" required />
+        <div className="container my-5 pt-5">
+            <div className="col-md-4">
+                <form onSubmit={handleLogin}>
+                    <div className="mb-3">
+                        <label htmlFor="email" className="form-label">Email address</label>
+                        <input type="email" className="form-control" id="email" value={formData.email} onChange={handleChange} autoComplete="email" required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="password" value={formData.password} onChange={handleChange} autoComplete="current-password" required />
+                    </div>
+                    <button type="submit" className="btn btn-primary">Login</button>
+                </form>
             </div>
-            <div className="mb-3">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" id="password" value={formData.password} onChange={handleChange} autoComplete="current-password" required />
-            </div>
-            <div className="mb-3 form-check">
-                <input type="checkbox" className="form-check-input" id="terms" />
-                <label className="form-check-label" htmlFor="terms">Agree to our terms</label>
-            </div>
-            <button type="submit" className="btn btn-primary">Login</button>
-      </form>
+        <div className='pt-4 d-flex flex-column justify-content-center'>
+            <p>
+            If you don't have an account with us <button onClick={handleRegisterRedirect} className="btn btn-info ms-1">SIGN UP</button>
+            </p>
+        </div>
+      </div>
     );
 }
 

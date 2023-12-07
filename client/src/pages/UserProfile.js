@@ -12,7 +12,7 @@ const UserProfile = () => {
         }).catch(err=>{ console.log(err)} );
     }, []);
     return (
-       <div className="container">
+       <div className="container my-5 pt-5">
           <h1>Welcome to {userProfile.firstName} profile</h1>
           <p className='fw-bold mt-4'>{userProfile.firstName} info:</p>
           <ul className="list-group list-group-flush">

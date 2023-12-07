@@ -55,6 +55,7 @@ async function login(req, res) {
             _id: user._id,
             firstName: user.firstName,
             lastName: user.lastName,
+            userPrefs: user.userPrefs,
         };
 
         // Respond
